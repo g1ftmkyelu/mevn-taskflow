@@ -50,7 +50,7 @@
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useRoute } from 'vue-router';
-import { required, email, minLength } from '@/utils/validationRules';
+import { required, email as validateEmail, minLength } from '@/utils/validationRules';
 
 const authStore = useAuthStore();
 const route = useRoute();
@@ -60,7 +60,7 @@ const password = ref('');
 
 const rules = {
   required: value => required(value),
-  email: value => email(value),
+  email: value => validateEmail(value),
   min: len => value => minLength(value, len)
 };
 
