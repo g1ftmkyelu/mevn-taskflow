@@ -1,0 +1,71 @@
+/* Global styles for the application */
+html, body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  background-color: #f5f5f5; /* Light grey background */
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Vuetify overrides and custom styles */
+.v-application {
+  background-color: #f5f5f5 !important; /* Ensure app background matches body */
+}
+
+.v-toolbar-title {
+  font-weight: 700;
+}
+
+.v-btn {
+  text-transform: none !important; /* Keep button text case as is */
+  font-weight: 500;
+}
+
+/* Glassmorphism base styles - applied via class in components */
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .v-toolbar-title {
+    font-size: 1.2rem !important;
+  }
+  .v-btn {
+    font-size: 0.8rem;
+  }
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb_taskflow
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: taskflow_user
+      MONGO_INITDB_ROOT_PASSWORD: taskflow_password
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/admin --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    container_name: taskflow_backend
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      MONGO_URI: mongodb://taskflow_user:taskflow_password@mongodb:27017/taskflow_db?authSource=admin
+      JWT_SECRET: your_jwt_secret_key_32_chars_long
+      FRONTEND_URL: http://localhost:8080
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    container_name: taskflow_frontend
+    ports:
+      - "8080:8080"
+    environment:
+      VITE_API_BASE_URL: http://localhost:4000/api
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  mongo_data:
