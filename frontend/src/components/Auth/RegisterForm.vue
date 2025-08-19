@@ -16,7 +16,7 @@
           clearable
         ></v-text-field>
         <v-text-field
-          v-model="email"
+          v-model="registerEmail"
           label="Email"
           type="email"
           prepend-inner-icon="mdi-email"
@@ -73,7 +73,7 @@ import { required, email, minLength, confirmed } from '@/utils/validationRules';
 const authStore = useAuthStore();
 
 const username = ref('');
-const email = ref('');
+const registerEmail = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 
@@ -86,7 +86,7 @@ const rules = {
 
 const submitForm = async () => {
   authStore.clearError();
-  const success = await authStore.register(username.value, email.value, password.value);
+  const success = await authStore.register(username.value, registerEmail.value, password.value);
   if (success) {
     // Form fields are cleared by router push
   }
