@@ -9,6 +9,7 @@ npm start &
 BACKEND_PID=$!
 cd ..
 
+
 # Start frontend
 echo "Starting frontend development server..."
 cd frontend
