@@ -18,7 +18,8 @@
     "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
     "vue-router": "^4.3.2",
-    "vuetify": "^3.6.6"
+    "vuetify": "^3.6.6",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
