@@ -6,9 +6,9 @@ echo "Starting MEVN TaskFlow installation..."
 echo "Installing backend dependencies..."
 cd backend
 npm install
-if [ $? -ne 0 ]; then
-    echo "Backend npm install failed. Exiting."
-    exit 1
+if [$? -ne 0]; then
+echo "Backend npm install failed. Exiting."
+exit 1
 fi
 cd ..
 
@@ -16,11 +16,12 @@ cd ..
 echo "Installing frontend dependencies..."
 cd frontend
 npm install
-if [ $? -ne 0 ]; then
-    echo "Frontend npm install failed. Exiting."
-    exit 1
+if [$? -ne 0]; then
+echo "Frontend npm install failed. Exiting."
+exit 1
 fi
 cd ..
+
 
 echo "Installation complete. You can now run 'npm start' in both backend and frontend directories, or use 'docker-compose up --build'."
 echo "Remember to set up your .env files in both backend/ and frontend/ directories."
