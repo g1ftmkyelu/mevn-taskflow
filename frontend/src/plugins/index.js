@@ -6,9 +6,9 @@
 
 // Plugins
 import vuetify from './vuetify';
-import { loadFonts } from './webfontloader';
+// import { loadFonts } from './webfontloader'; // Removed as fonts are loaded via CDN in index.html
 
 export function registerPlugins (app) {
-  loadFonts();
+  // loadFonts(); // Removed as fonts are loaded via CDN in index.html
   app.use(vuetify);
 }
