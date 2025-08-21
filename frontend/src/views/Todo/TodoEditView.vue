@@ -1,7 +1,7 @@
 <template>
   <v-container class="py-8">
     <v-row justify="center">
-      <v-col cols="12" md="8" lg="6">
+      <v-col cols="12" md="10" lg="8">
         <h1 class="text-h4 text-center mb-6 text-primary">Edit Task</h1>
 
         <v-alert v-if="todoStore.error" type="error" dismissible class="mb-4">

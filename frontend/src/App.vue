@@ -2,7 +2,7 @@
   <v-app>
     <AppHeader v-if="shouldShowHeader" />
     <v-main>
-      <v-container fluid class="pa-0">
+      <v-container fluid>
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />
