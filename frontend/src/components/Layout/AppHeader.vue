@@ -2,7 +2,7 @@
   <v-app-bar app color="primary" dark elevation="4">
     <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
-    <v-btn icon @click="themeStore.toggleTheme()" class="mr-2">
+    <v-btn icon @click="themeStore.toggleTheme(theme)" class="mr-2">
       <v-icon>mdi-theme-light-dark</v-icon>
       <v-tooltip activator="parent" location="bottom">Toggle Light/Dark Mode</v-tooltip>
     </v-btn>
@@ -89,11 +89,13 @@
 <script setup>
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import { useThemeStore } from '@/stores/theme'; // Import the new theme store
+import { useThemeStore } from '@/stores/theme';
+import { useTheme } from 'vuetify'; // Import useTheme
 
 const authStore = useAuthStore();
-const themeStore = useThemeStore(); // Initialize the theme store
+const themeStore = useThemeStore();
 const drawer = ref(false);
+const theme = useTheme(); // Initialize the Vuetify theme composable
 </script>
 
 <style scoped>

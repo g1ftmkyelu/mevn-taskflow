@@ -13,7 +13,7 @@
               color="primary"
               hide-details
               class="mb-2"
-              @change="themeStore.toggleTheme()"
+              @change="themeStore.toggleTheme(theme)"
             ></v-switch>
             <v-select
               v-model="language"
@@ -98,10 +98,12 @@ import { ref } from 'vue';
 import AccordionPanel from '@/components/Accordion/AccordionPanel.vue';
 import UserProfileFormModal from '@/components/Modal/UserProfileFormModal.vue';
 import { useAuthStore } from '@/stores/auth';
-import { useThemeStore } from '@/stores/theme'; // Import the new theme store
+import { useThemeStore } from '@/stores/theme';
+import { useTheme } from 'vuetify'; // Import useTheme
 
 const authStore = useAuthStore();
-const themeStore = useThemeStore(); // Initialize the theme store
+const themeStore = useThemeStore();
+const theme = useTheme(); // Initialize the Vuetify theme composable
 
 const language = ref('English');
 const emailNotifications = ref(true);
