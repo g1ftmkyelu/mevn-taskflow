@@ -1,6 +1,5 @@
 const User = require('../models/User');
 const { generateToken } = require('../utils/jwt');
-const { comparePassword } = require('../utils/password');
 
 const register = async (username, email, password) => {
   const userExists = await User.findOne({ $or: [{ email }, { username }] });
@@ -25,7 +24,7 @@ const register = async (username, email, password) => {
 const login = async (email, password) => {
   const user = await User.findOne({ email });
 
-  if (user && (await comparePassword(password, user.password))) {
+  if (user && (await user.matchPassword(password))) { // Corrected: Use user.matchPassword
     const token = generateToken(user._id);
     return { user, token };
   } else {
