@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { sequelize, User, Todo, Category } = require('../src/config/db'); // Import sequelize and models
+const { sequelize, User, Todo, Category } = require('../config/db'); // Import sequelize and models
 
 const seedData = async () => {
   try {
