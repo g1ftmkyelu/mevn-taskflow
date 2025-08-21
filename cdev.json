@@ -1,7 +1,7 @@
 {
   "projectName": "MEVN TaskFlow",
   "backendPort": 4000,
-  "frontendPort": 8080,
+  "frontendPort": 8082,
   "description": "A simple, robust, and intuitive web application for users to manage their personal to-do lists, enabling creation, viewing, updating, and deletion of tasks with user authentication.",
   "technologies": {
     "frontend": "Vue.js 3 (Composition API), Pinia, Vuetify, VeeValidate, Axios, Vue Icons, Vite",
