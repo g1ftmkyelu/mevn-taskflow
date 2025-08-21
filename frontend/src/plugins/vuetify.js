@@ -16,15 +16,15 @@ export default createVuetify({
     themes: {
       light: {
         colors: {
-          primary: '#6200EE', // Deep Purple
-          secondary: '#03DAC6', // Teal
-          accent: '#FF4081', // Pink Accent
-          error: '#B00020',
-          info: '#2196F3',
-          success: '#4CAF50',
-          warning: '#FB8C00',
-          background: '#F5F5F5', // Light Grey
-          surface: '#FFFFFF', // White
+          primary: '#424242', // Dark Grey
+          secondary: '#9E9E9E', // Medium Grey
+          accent: '#00BFA5', // Muted Teal Accent
+          error: '#D32F2F',
+          info: '#1976D2',
+          success: '#388E3C',
+          warning: '#FBC02D',
+          background: '#F5F5F5', // Very Light Grey
+          surface: '#FFFFFF', // Pure White
         },
       },
     },

@@ -110,12 +110,12 @@ const deleteTodo = async () => {
 
 .v-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* Softer hover shadow */
 }
 
 .completed-todo {
   opacity: 0.7;
-  background: rgba(144, 238, 144, 0.15) !important; /* Light green tint */
+  /* Removed background tint for a more minimal look */
 }
 
 .text-decoration-line-through {

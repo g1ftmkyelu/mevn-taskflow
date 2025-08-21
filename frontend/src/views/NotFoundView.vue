@@ -20,7 +20,7 @@
 
 <style scoped>
 .not-found-background {
-  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+  background-color: #F5F5F5; /* Solid very light grey background */
   min-height: 100vh;
   display: flex;
   align-items: center;

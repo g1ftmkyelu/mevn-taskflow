@@ -38,7 +38,7 @@
 
 <style scoped>
 .v-footer {
-  background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #424242; /* New primary color */
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
 }
 </style>

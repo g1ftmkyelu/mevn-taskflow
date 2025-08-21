@@ -10,7 +10,7 @@ import LoginForm from '@/components/Auth/LoginForm.vue';
 
 <style scoped>
 .auth-background {
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  background-color: #F5F5F5; /* Solid very light grey background */
   min-height: 100vh;
   display: flex;
   align-items: center;

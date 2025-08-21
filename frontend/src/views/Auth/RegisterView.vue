@@ -10,7 +10,7 @@ import RegisterForm from '@/components/Auth/RegisterForm.vue';
 
 <style scoped>
 .auth-background {
-  background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+  background-color: #F5F5F5; /* Solid very light grey background */
   min-height: 100vh;
   display: flex;
   align-items: center;
