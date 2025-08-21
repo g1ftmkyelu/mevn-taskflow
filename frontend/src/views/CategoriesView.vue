@@ -11,6 +11,16 @@
 
 <script setup>
 import CategoryTable from '@/components/Category/CategoryTable.vue';
+import { useCategoryStore } from '@/stores/category';
+import { onBeforeRouteEnter } from 'vue-router';
+
+const categoryStore = useCategoryStore();
+
+onBeforeRouteEnter(async (to, from, next) => {
+  const store = useCategoryStore();
+  await store.fetchCategories();
+  next();
+});
 </script>
 
 <style scoped>

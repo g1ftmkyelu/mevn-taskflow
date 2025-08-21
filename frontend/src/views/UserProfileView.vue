@@ -44,17 +44,18 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import UserProfileFormModal from '@/components/Modal/UserProfileFormModal.vue';
+import { onBeforeRouteEnter } from 'vue-router';
 
 const authStore = useAuthStore();
 const profileModalOpen = ref(false);
 
-onMounted(() => {
-  if (!authStore.currentUser) {
-    authStore.fetchMe(); // Fetch user data if not already in store
-  }
+onBeforeRouteEnter(async (to, from, next) => {
+  const store = useAuthStore();
+  await store.fetchMe(); // Always fetch user data when entering this route
+  next();
 });
 
 const formattedCreatedAt = computed(() => {
