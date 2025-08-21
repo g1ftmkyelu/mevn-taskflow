@@ -1,12 +1,6 @@
 <template>
   <v-app-bar app color="primary" dark elevation="4">
     <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-    <v-toolbar-title class="font-weight-bold text-h5">
-      <router-link to="/dashboard" class="text-decoration-none text-white">
-        <v-icon class="mr-2">mdi-check-all</v-icon>
-        TaskFlow
-      </router-link>
-    </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn v-if="authStore.isAuthenticated" text @click="authStore.logout()" class="text-capitalize">
       <v-icon start>mdi-logout</v-icon>
@@ -22,7 +16,10 @@
     <v-list-item class="py-4">
       <v-list-item-content>
         <v-list-item-title class="text-h6">
-          TaskFlow Menu
+          <router-link to="/dashboard" class="text-decoration-none text-primary">
+            <v-icon class="mr-2">mdi-check-all</v-icon>
+            TaskFlow Menu
+          </router-link>
         </v-list-item-title>
         <v-list-item-subtitle v-if="authStore.isAuthenticated">
           Hello, {{ authStore.currentUser?.username }}
