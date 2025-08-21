@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <AppHeader />
+    <AppHeader v-if="shouldShowHeader" />
     <v-main>
       <v-container fluid class="pa-0">
         <router-view v-slot="{ Component }">
@@ -14,7 +14,15 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import AppHeader from '@/components/Layout/AppHeader.vue';
+
+const route = useRoute();
+
+const shouldShowHeader = computed(() => {
+  return route.name !== 'login' && route.name !== 'register';
+});
 </script>
 
 <style>
