@@ -35,5 +35,8 @@ export default defineConfig({
         }
       }
     }
+  },
+  optimizeDeps: {
+    exclude: ['vue-router']
   }
 });
