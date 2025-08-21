@@ -23,7 +23,7 @@ export default createVuetify({
           info: '#1976D2',
           success: '#388E3C',
           warning: '#FBC02D',
-          background: '#F5F5F5', // Very Light Grey
+          background: '#E8F5E9', // Light Green
           surface: '#FFFFFF', // Pure White
         },
       },

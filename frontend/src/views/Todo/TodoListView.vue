@@ -58,7 +58,7 @@ const handleAddTodo = async (newTodo) => {
 
 <style scoped>
 .v-container {
-  background-color: #F5F5F5; /* Solid very light grey background */
+  background-color: #E8F5E9; /* Solid light green background */
   min-height: calc(100vh - 64px - 64px); /* Adjust for header and footer height */
 }
 </style>
