@@ -2,7 +2,7 @@
   <v-app-bar app color="primary" dark elevation="4">
     <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
     <v-toolbar-title class="font-weight-bold text-h5">
-      <router-link to="/" class="text-decoration-none text-white">
+      <router-link to="/dashboard" class="text-decoration-none text-white">
         <v-icon class="mr-2">mdi-check-all</v-icon>
         TaskFlow
       </router-link>
@@ -31,13 +31,41 @@
     </v-list-item>
     <v-divider></v-divider>
     <v-list density="compact" nav>
-      <v-list-item prepend-icon="mdi-home" title="Home" value="home" to="/"></v-list-item>
+      <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard" value="dashboard" to="/dashboard"></v-list-item>
       <v-list-item
         v-if="authStore.isAuthenticated"
         prepend-icon="mdi-format-list-checks"
         title="My Todos"
         value="todos"
         to="/todos"
+      ></v-list-item>
+      <v-list-item
+        v-if="authStore.isAuthenticated"
+        prepend-icon="mdi-tag-multiple"
+        title="Categories"
+        value="categories"
+        to="/categories"
+      ></v-list-item>
+      <v-list-item
+        v-if="authStore.isAuthenticated"
+        prepend-icon="mdi-account-circle"
+        title="Profile"
+        value="profile"
+        to="/profile"
+      ></v-list-item>
+      <v-list-item
+        v-if="authStore.isAuthenticated"
+        prepend-icon="mdi-chart-bar"
+        title="Reports"
+        value="reports"
+        to="/reports"
+      ></v-list-item>
+      <v-list-item
+        v-if="authStore.isAuthenticated"
+        prepend-icon="mdi-cog"
+        title="Settings"
+        value="settings"
+        to="/settings"
       ></v-list-item>
       <v-list-item
         v-if="!authStore.isAuthenticated"

@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         const response = await api.post('/auth/register', { username, email, password });
         this.setAuthData(response.data.user, response.data.token);
-        router.push({ name: 'todos' });
+        router.push({ name: 'dashboard' }); // Redirect to dashboard
         return true;
       } catch (err) {
         this.error = err.response?.data?.message || 'Registration failed. Please try again.';
@@ -35,10 +35,40 @@ export const useAuthStore = defineStore('auth', {
       try {
         const response = await api.post('/auth/login', { email, password });
         this.setAuthData(response.data.user, response.data.token);
-        router.push({ name: 'todos' });
+        router.push({ name: 'dashboard' }); // Redirect to dashboard
         return true;
       } catch (err) {
         this.error = err.response?.data?.message || 'Login failed. Invalid credentials.';
+        return false;
+      } finally {
+        this.loading = false;
+      }
+    },
+    async fetchMe() {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await api.get('/users/me');
+        this.user = response.data; // Update user data in store
+        localStorage.setItem('user', JSON.stringify(this.user));
+        return true;
+      } catch (err) {
+        this.error = err.response?.data?.message || 'Failed to fetch user profile.';
+        return false;
+      } finally {
+        this.loading = false;
+      }
+    },
+    async updateMe(userData) {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await api.put('/users/me', userData);
+        this.user = response.data.user; // Update user data in store
+        localStorage.setItem('user', JSON.stringify(this.user));
+        return true;
+      } catch (err) {
+        this.error = err.response?.data?.message || 'Failed to update profile.';
         return false;
       } finally {
         this.loading = false;

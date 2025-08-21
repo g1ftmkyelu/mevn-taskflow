@@ -33,6 +33,13 @@ export const minLength = (value, length) => {
   return true;
 };
 
+export const maxLength = (value, length) => {
+  if (value && value.length > length) {
+    return `Cannot exceed ${length} characters`;
+  }
+  return true;
+};
+
 export const confirmed = (value, target) => {
   if (value !== target) {
     return 'Passwords do not match';

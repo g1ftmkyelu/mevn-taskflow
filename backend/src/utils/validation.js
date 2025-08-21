@@ -57,9 +57,40 @@ const updateTodoSchema = Joi.object({
   'object.min': 'At least one field must be provided for update'
 });
 
+const createCategorySchema = Joi.object({
+  name: Joi.string().min(1).max(50).required().messages({
+    'string.min': 'Category name cannot be empty',
+    'string.max': 'Category name cannot exceed 50 characters',
+    'string.empty': 'Category name is required'
+  })
+});
+
+const updateCategorySchema = Joi.object({
+  name: Joi.string().min(1).max(50).required().messages({
+    'string.min': 'Category name cannot be empty',
+    'string.max': 'Category name cannot exceed 50 characters',
+    'string.empty': 'Category name is required'
+  })
+});
+
+const updateUserSchema = Joi.object({
+  username: Joi.string().min(3).max(30).optional().messages({
+    'string.min': 'Username must be at least 3 characters long',
+    'string.max': 'Username cannot exceed 30 characters'
+  }),
+  email: Joi.string().email().optional().messages({
+    'string.email': 'Please enter a valid email address'
+  })
+}).min(1).messages({
+  'object.min': 'At least one field (username or email) must be provided for update'
+});
+
 module.exports = {
   registerSchema,
   loginSchema,
   createTodoSchema,
-  updateTodoSchema
+  updateTodoSchema,
+  createCategorySchema,
+  updateCategorySchema,
+  updateUserSchema
 };

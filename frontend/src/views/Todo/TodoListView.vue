@@ -5,7 +5,15 @@
         <h1 class="text-h4 text-center mb-6 text-primary">My Task List</h1>
 
         <v-card class="mb-6 pa-4 glass-card" elevation="8">
-          <TodoForm @submit="handleAddTodo" />
+          <v-card-title class="text-h6 d-flex justify-space-between align-center">
+            Add New Task
+            <v-btn color="primary" @click="openAddTodoModal" prepend-icon="mdi-plus" class="text-capitalize">
+              Add Task
+            </v-btn>
+          </v-card-title>
+          <v-card-text>
+            <p class="text-body-2 text-grey-darken-1">Click the button above to add a new task.</p>
+          </v-card-text>
         </v-card>
 
         <v-alert v-if="todoStore.error" type="error" dismissible class="mb-4">
@@ -34,25 +42,54 @@
       </v-col>
     </v-row>
   </v-container>
+
+  <TodoFormModal
+    v-model="todoModalOpen"
+    :todo="selectedTodo"
+    :is-edit="isEditMode"
+    @submit="handleTodoSubmit"
+    @close="closeModal"
+  />
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useTodoStore } from '@/stores/todo';
-import TodoForm from '@/components/Todo/TodoForm.vue';
 import TodoItem from '@/components/Todo/TodoItem.vue';
+import TodoFormModal from '@/components/Modal/TodoFormModal.vue'; // New import
 
 const todoStore = useTodoStore();
+
+const todoModalOpen = ref(false);
+const selectedTodo = ref(null);
+const isEditMode = ref(false);
 
 onMounted(() => {
   todoStore.fetchTodos();
 });
 
-const handleAddTodo = async (newTodo) => {
-  const success = await todoStore.addTodo(newTodo);
-  if (success) {
-    // Optionally clear form or show success message
+const openAddTodoModal = () => {
+  selectedTodo.value = { title: '', description: '', completed: false, dueDate: null };
+  isEditMode.value = false;
+  todoModalOpen.value = true;
+};
+
+const handleTodoSubmit = async (todoData) => {
+  let success;
+  if (isEditMode.value) {
+    // This path is typically handled by TodoEditView, but keeping it for consistency if needed
+    success = await todoStore.updateTodo(selectedTodo.value._id, todoData);
+  } else {
+    success = await todoStore.addTodo(todoData);
   }
+  if (success) {
+    closeModal();
+  }
+};
+
+const closeModal = () => {
+  todoModalOpen.value = false;
+  selectedTodo.value = null;
 };
 </script>
 
@@ -60,5 +97,13 @@ const handleAddTodo = async (newTodo) => {
 .v-container {
   background-color: #F1F8E9; /* Solid light green background */
   min-height: calc(100vh - 64px - 64px); /* Adjust for header and footer height */
+}
+.glass-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 15px;
+  border: 1px solid rgba(224, 224, 224, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
 }
 </style>

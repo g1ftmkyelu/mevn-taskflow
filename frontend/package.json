@@ -14,10 +14,12 @@
     "@vee-validate/i18n": "^4.12.6",
     "@vee-validate/rules": "^4.12.6",
     "axios": "^1.6.8",
+    "chart.js": "^4.4.3",
     "pinia": "^2.1.7",
     "roboto-fontface": "^0.10.0",
     "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
+    "vue-chartjs": "^5.3.1",
     "vue-router": "^4.3.2",
     "vuetify": "^3.6.6"
   },

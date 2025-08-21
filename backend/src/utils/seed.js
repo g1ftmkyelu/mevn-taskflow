@@ -2,6 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const User = require('../models/User');
 const Todo = require('../models/Todo');
+const Category = require('../models/Category'); // New
 const connectDB = require('../config/db');
 
 const seedData = async () => {
@@ -11,6 +12,7 @@ const seedData = async () => {
     console.log('Clearing existing data...');
     await User.deleteMany({});
     await Todo.deleteMany({});
+    await Category.deleteMany({}); // New
     console.log('Existing data cleared.');
 
     console.log('Creating default user...');
@@ -50,9 +52,46 @@ const seedData = async () => {
         description: 'Create Dockerfiles and docker-compose.yml for development and production.',
         completed: false,
         dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000) // 14 days from now
+      },
+      {
+        userId: user._id,
+        title: 'Plan Q3 Marketing Campaign',
+        description: 'Outline strategies and allocate budget for the next quarter.',
+        completed: false,
+        dueDate: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000)
+      },
+      {
+        userId: user._id,
+        title: 'Review Team Performance',
+        description: 'Conduct one-on-one meetings and provide feedback.',
+        completed: true,
+        dueDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)
+      },
+      {
+        userId: user._id,
+        title: 'Prepare for Client Presentation',
+        description: 'Finalize slides and rehearse key talking points.',
+        completed: false,
+        dueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
+      },
+      {
+        userId: user._id,
+        title: 'Research New Technologies',
+        description: 'Explore AI/ML trends and their potential application.',
+        completed: false,
+        dueDate: null
       }
     ]);
     console.log('Sample todos created.');
+
+    console.log('Creating sample categories for the user...');
+    await Category.insertMany([
+      { userId: user._id, name: 'Work' },
+      { userId: user._id, name: 'Personal' },
+      { userId: user._id, name: 'Learning' },
+      { userId: user._id, name: 'Health' }
+    ]);
+    console.log('Sample categories created.');
 
     console.log('Seed data successfully populated!');
     process.exit(0);

@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const todoRoutes = require('./routes/todoRoutes');
+const categoryRoutes = require('./routes/categoryRoutes'); // New
 const errorHandler = require('./middleware/errorHandler');
 const corsOptions = require('./config/corsOptions');
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/todos', todoRoutes);
+app.use('/api/categories', categoryRoutes); // New
 
 // Health Check Endpoint
 app.get('/api/health', (req, res) => {
