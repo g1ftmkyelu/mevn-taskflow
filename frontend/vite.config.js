@@ -37,6 +37,8 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    exclude: ['vue-router']
+    // Removed 'vue-router' from exclude list to allow Vite to pre-bundle it,
+    // which can resolve "doesn't provide an export" errors.
+    exclude: []
   }
 });
