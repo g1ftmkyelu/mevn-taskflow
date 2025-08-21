@@ -11,16 +11,9 @@
 
 <script setup>
 import CategoryTable from '@/components/Category/CategoryTable.vue';
-import { useCategoryStore } from '@/stores/category';
-import { onBeforeRouteEnter } from 'vue-router';
+import { useCategoryStore } from '@/stores/category'; // Keep this import as it's used by CategoryTable
 
-const categoryStore = useCategoryStore();
-
-onBeforeRouteEnter(async (to, from, next) => {
-  const store = useCategoryStore();
-  await store.fetchCategories();
-  next();
-});
+const categoryStore = useCategoryStore(); // Keep this line, though it's not directly used in this file after the change, it's part of the setup.
 </script>
 
 <style scoped>
