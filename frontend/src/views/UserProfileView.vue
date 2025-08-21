@@ -47,16 +47,9 @@
 import { ref, computed } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import UserProfileFormModal from '@/components/Modal/UserProfileFormModal.vue';
-import { onBeforeRouteEnter } from 'vue-router';
 
 const authStore = useAuthStore();
 const profileModalOpen = ref(false);
-
-onBeforeRouteEnter(async (to, from, next) => {
-  const store = useAuthStore();
-  await store.fetchMe(); // Always fetch user data when entering this route
-  next();
-});
 
 const formattedCreatedAt = computed(() => {
   if (!authStore.currentUser?.createdAt) return 'N/A';

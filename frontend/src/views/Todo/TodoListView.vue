@@ -57,19 +57,12 @@ import { ref } from 'vue';
 import { useTodoStore } from '@/stores/todo';
 import TodoItem from '@/components/Todo/TodoItem.vue';
 import TodoFormModal from '@/components/Modal/TodoFormModal.vue';
-import { onBeforeRouteEnter } from 'vue-router';
 
 const todoStore = useTodoStore();
 
 const todoModalOpen = ref(false);
 const selectedTodo = ref(null);
 const isEditMode = ref(false);
-
-onBeforeRouteEnter(async (to, from, next) => {
-  const store = useTodoStore();
-  await store.fetchTodos();
-  next();
-});
 
 const openAddTodoModal = () => {
   selectedTodo.value = { title: '', description: '', completed: false, dueDate: null };

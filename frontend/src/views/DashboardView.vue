@@ -69,15 +69,8 @@ import { ref, computed } from 'vue';
 import { useTodoStore } from '@/stores/todo';
 import BarChart from '@/components/Charts/BarChart.vue';
 import LineChart from '@/components/Charts/LineChart.vue';
-import { onBeforeRouteEnter } from 'vue-router';
 
 const todoStore = useTodoStore();
-
-onBeforeRouteEnter(async (to, from, next) => {
-  const store = useTodoStore();
-  await store.fetchTodos();
-  next();
-});
 
 const recentTodoHeaders = [
   { title: 'Title', key: 'title' },
