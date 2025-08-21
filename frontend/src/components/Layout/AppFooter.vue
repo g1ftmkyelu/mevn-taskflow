@@ -38,7 +38,7 @@
 
 <style scoped>
 .v-footer {
-  background-color: #424242; /* New primary color */
+  background-color: #2E7D32; /* New primary color */
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
 }
 </style>

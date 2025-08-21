@@ -87,7 +87,7 @@ const handleUpdateTodo = async (updatedData) => {
 
 <style scoped>
 .v-container {
-  background-color: #E8F5E9; /* Solid light green background */
+  background-color: #F1F8E9; /* Solid light green background */
   min-height: calc(100vh - 64px - 64px);
 }
 </style>

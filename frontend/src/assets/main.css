@@ -4,7 +4,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* Prevent horizontal scroll */
-  background-color: #E8F5E9; /* Light Green background */
+  background-color: #F1F8E9; /* Light Green background */
 }
 
 #app {
@@ -18,7 +18,7 @@ html, body {
 
 /* Vuetify overrides and custom styles */
 .v-application {
-  background-color: #E8F5E9 !important; /* Ensure app background matches body */
+  background-color: #F1F8E9 !important; /* Ensure app background matches body */
 }
 
 .v-toolbar-title {
