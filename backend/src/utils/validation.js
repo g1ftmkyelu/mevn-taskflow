@@ -36,6 +36,7 @@ const createTodoSchema = Joi.object({
   description: Joi.string().max(1000).allow('').optional().messages({
     'string.max': 'Description cannot exceed 1000 characters'
   }),
+  completed: Joi.boolean().optional(), // Added 'completed' field as optional
   dueDate: Joi.date().allow(null).optional().messages({
     'date.base': 'Due date must be a valid date'
   })
