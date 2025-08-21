@@ -68,7 +68,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useTodoStore } from '@/stores/todo';
 import BarChart from '@/components/Charts/BarChart.vue';
 import LineChart from '@/components/Charts/LineChart.vue';
@@ -198,6 +198,10 @@ const chartOptions = {
     }
   }
 };
+
+onMounted(() => {
+  todoStore.fetchTodos();
+});
 </script>
 
 <style scoped>

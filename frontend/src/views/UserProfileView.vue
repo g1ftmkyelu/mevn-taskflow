@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import UserProfileFormModal from '@/components/Modal/UserProfileFormModal.vue';
 
@@ -55,6 +55,13 @@ const formattedCreatedAt = computed(() => {
   if (!authStore.currentUser?.createdAt) return 'N/A';
   const date = new Date(authStore.currentUser.createdAt);
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+});
+
+onMounted(() => {
+  // Ensure user data is fetched when navigating to the profile page
+  if (!authStore.currentUser) {
+    authStore.fetchMe();
+  }
 });
 
 const openProfileEdit = () => {

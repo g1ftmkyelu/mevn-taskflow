@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useTodoStore } from '@/stores/todo';
 import TodoItem from '@/components/Todo/TodoItem.vue';
 import TodoFormModal from '@/components/Modal/TodoFormModal.vue';
@@ -63,6 +63,10 @@ const todoStore = useTodoStore();
 const todoModalOpen = ref(false);
 const selectedTodo = ref(null);
 const isEditMode = ref(false);
+
+onMounted(() => {
+  todoStore.fetchTodos();
+});
 
 const openAddTodoModal = () => {
   selectedTodo.value = { title: '', description: '', completed: false, dueDate: null };
