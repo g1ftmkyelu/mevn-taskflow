@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const { User } = require('../config/db'); // Import User model from db config
 
 const protect = async (req, res, next) => {
   let token;
@@ -13,7 +13,7 @@ const protect = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       // Attach user to the request
-      req.user = await User.findById(decoded.id).select('-password');
+      req.user = await User.findByPk(decoded.id, { attributes: { exclude: ['password'] } });
       if (!req.user) {
         const error = new Error('Not authorized, user not found');
         error.statusCode = 401;

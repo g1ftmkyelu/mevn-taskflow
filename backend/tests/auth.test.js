@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../src/app');
-const User = require('../src/models/User');
+const { User, sequelize } = require('../src/config/db'); // Import User and sequelize
 const { generateToken } = require('../src/utils/jwt');
 
 describe('Auth API', () => {
@@ -9,6 +9,11 @@ describe('Auth API', () => {
     email: 'test1@example.com',
     password: 'password123'
   };
+
+  beforeEach(async () => {
+    // Clear and re-sync database for each test
+    await sequelize.sync({ force: true });
+  });
 
   it('should register a new user', async () => {
     const res = await request(app)
@@ -20,7 +25,7 @@ describe('Auth API', () => {
     expect(res.body.user.email).toEqual(testUser.email);
     expect(res.body.user.username).toEqual(testUser.username);
 
-    const userInDb = await User.findOne({ email: testUser.email });
+    const userInDb = await User.findOne({ where: { email: testUser.email } });
     expect(userInDb).toBeDefined();
     expect(await userInDb.matchPassword(testUser.password)).toBe(true);
   });
@@ -67,7 +72,7 @@ describe('Auth API', () => {
 
   it('should get authenticated user profile', async () => {
     const user = await User.create(testUser);
-    const token = generateToken(user._id);
+    const token = generateToken(user.id);
 
     const res = await request(app)
       .get('/api/users/me')

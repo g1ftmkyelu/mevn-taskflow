@@ -1,5 +1,6 @@
 const authService = require('../services/authService');
 const { registerSchema, loginSchema } = require('../utils/validation');
+const { UniqueConstraintError } = require('sequelize');
 
 // @desc    Register user
 // @route   POST /api/auth/register
@@ -17,14 +18,14 @@ exports.registerUser = async (req, res, next) => {
     res.status(201).json({
       message: 'User registered successfully',
       user: {
-        id: user._id,
+        id: user.id,
         username: user.username,
         email: user.email
       },
       token
     });
   } catch (error) {
-    if (error.message.includes('duplicate key error')) {
+    if (error instanceof UniqueConstraintError) {
       error.statusCode = 409; // Conflict
       error.message = 'User with that email or username already exists.';
     }
@@ -48,7 +49,7 @@ exports.loginUser = async (req, res, next) => {
     res.status(200).json({
       message: 'Logged in successfully',
       user: {
-        id: user._id,
+        id: user.id,
         username: user.username,
         email: user.email
       },

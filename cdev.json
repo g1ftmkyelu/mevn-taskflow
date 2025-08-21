@@ -5,12 +5,12 @@
   "description": "A simple, robust, and intuitive web application for users to manage their personal to-do lists, enabling creation, viewing, updating, and deletion of tasks with user authentication.",
   "technologies": {
     "frontend": "Vue.js 3 (Composition API), Pinia, Vuetify, VeeValidate, Axios, Vue Icons, Vite",
-    "backend": "Node.js (Express.js), Mongoose, bcryptjs, JWT",
-    "database": "MongoDB"
+    "backend": "Node.js (Express.js), Sequelize, bcryptjs, JWT",
+    "database": "SQLite"
   },
   "author": "AI Software Architect",
-  "lastModified": "2025-08-21T00:52:29.016Z",
-  "lastEditorAccess": "2025-08-21T00:52:29.016Z",
-  "currentSession": "vbcojwhba",
+  "lastModified": "2025-08-21T01:41:44.030Z",
+  "lastEditorAccess": "2025-08-21T01:41:44.030Z",
+  "currentSession": "kajpnaeew",
   "isOpenInEditor": true
 }

@@ -1,26 +1,26 @@
-const Todo = require('../models/Todo');
+const { Todo } = require('../config/db'); // Import Todo model from db config
 
 const createTodo = async (userId, todoData) => {
-  const todo = new Todo({
+  const todo = await Todo.create({
     userId,
     title: todoData.title,
     description: todoData.description,
     dueDate: todoData.dueDate || null,
     completed: todoData.completed || false
   });
-  return await todo.save();
+  return todo;
 };
 
 const getTodosByUserId = async (userId) => {
-  return await Todo.find({ userId }).sort({ createdAt: -1 });
+  return await Todo.findAll({ where: { userId }, order: [['createdAt', 'DESC']] });
 };
 
 const getTodoById = async (todoId, userId) => {
-  return await Todo.findOne({ _id: todoId, userId });
+  return await Todo.findOne({ where: { id: todoId, userId } });
 };
 
 const updateTodo = async (todoId, userId, updateData) => {
-  const todo = await Todo.findOne({ _id: todoId, userId });
+  const todo = await Todo.findOne({ where: { id: todoId, userId } });
 
   if (!todo) {
     return null; // Not found or unauthorized
@@ -32,12 +32,13 @@ const updateTodo = async (todoId, userId, updateData) => {
   if (updateData.completed !== undefined) todo.completed = updateData.completed;
   if (updateData.dueDate !== undefined) todo.dueDate = updateData.dueDate;
 
-  todo.updatedAt = Date.now();
-  return await todo.save();
+  await todo.save();
+  return todo;
 };
 
 const deleteTodo = async (todoId, userId) => {
-  return await Todo.findOneAndDelete({ _id: todoId, userId });
+  const deletedRows = await Todo.destroy({ where: { id: todoId, userId } });
+  return deletedRows > 0; // Returns true if a todo was deleted, false otherwise
 };
 
 module.exports = {

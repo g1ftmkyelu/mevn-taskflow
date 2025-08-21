@@ -1,5 +1,6 @@
 const categoryService = require('../services/categoryService');
 const { createCategorySchema, updateCategorySchema } = require('../utils/validation');
+const { UniqueConstraintError } = require('sequelize');
 
 // @desc    Create a new category
 // @route   POST /api/categories
@@ -15,7 +16,7 @@ exports.createCategory = async (req, res, next) => {
     const category = await categoryService.createCategory(req.user.id, name);
     res.status(201).json({ message: 'Category created successfully', category });
   } catch (error) {
-    if (error.message.includes('duplicate key error')) {
+    if (error instanceof UniqueConstraintError) {
       error.statusCode = 409; // Conflict
       error.message = 'Category with that name already exists for this user.';
     }
@@ -71,7 +72,7 @@ exports.updateCategory = async (req, res, next) => {
     }
     res.status(200).json({ message: 'Category updated successfully', category });
   } catch (error) {
-    if (error.message.includes('duplicate key error')) {
+    if (error instanceof UniqueConstraintError) {
       error.statusCode = 409; // Conflict
       error.message = 'Category with that name already exists for this user.';
     }

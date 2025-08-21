@@ -1,5 +1,6 @@
 const userService = require('../services/userService');
 const { updateUserSchema } = require('../utils/validation');
+const { UniqueConstraintError } = require('sequelize');
 
 // @desc    Get current authenticated user profile
 // @route   GET /api/users/me
@@ -13,7 +14,7 @@ exports.getMe = async (req, res, next) => {
       return next(error);
     }
     res.status(200).json({
-      id: user._id,
+      id: user.id,
       username: user.username,
       email: user.email,
       createdAt: user.createdAt
@@ -43,13 +44,13 @@ exports.updateMe = async (req, res, next) => {
     res.status(200).json({
       message: 'Profile updated successfully',
       user: {
-        id: updatedUser._id,
+        id: updatedUser.id,
         username: updatedUser.username,
         email: updatedUser.email
       }
     });
   } catch (error) {
-    if (error.message.includes('duplicate key error')) {
+    if (error instanceof UniqueConstraintError) {
       error.statusCode = 409; // Conflict
       error.message = 'Username or email already taken.';
     }
