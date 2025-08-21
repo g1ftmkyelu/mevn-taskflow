@@ -10,7 +10,7 @@ import RegisterForm from '@/components/Auth/RegisterForm.vue';
 
 <style scoped>
 .auth-background {
-  background-color: #F1F8E9; /* Solid light green background */
+  /* Background color is now managed by Vuetify theme */
   min-height: 100vh;
   display: flex;
   align-items: center;

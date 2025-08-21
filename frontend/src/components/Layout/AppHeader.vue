@@ -2,6 +2,10 @@
   <v-app-bar app color="primary" dark elevation="4">
     <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
+    <v-btn icon @click="themeStore.toggleTheme()" class="mr-2">
+      <v-icon>mdi-theme-light-dark</v-icon>
+      <v-tooltip activator="parent" location="bottom">Toggle Light/Dark Mode</v-tooltip>
+    </v-btn>
     <v-btn v-if="authStore.isAuthenticated" text @click="authStore.logout()" class="text-capitalize">
       <v-icon start>mdi-logout</v-icon>
       Logout
@@ -85,8 +89,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useThemeStore } from '@/stores/theme'; // Import the new theme store
 
 const authStore = useAuthStore();
+const themeStore = useThemeStore(); // Initialize the theme store
 const drawer = ref(false);
 </script>
 

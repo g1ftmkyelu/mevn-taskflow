@@ -4,7 +4,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* Prevent horizontal scroll */
-  background-color: #F1F8E9; /* Light Green background */
+  /* Background color is now managed by Vuetify theme */
 }
 
 #app {
@@ -18,7 +18,7 @@ html, body {
 
 /* Vuetify overrides and custom styles */
 .v-application {
-  background-color: #F1F8E9 !important; /* Ensure app background matches body */
+  /* Background color is now managed by Vuetify theme */
 }
 
 .v-toolbar-title {
@@ -32,11 +32,9 @@ html, body {
 
 /* Glassmorphism base styles - applied via class in components */
 .glass-card {
-  background: rgba(255, 255, 255, 0.5); /* More opaque, less "glassy" */
+  /* Background, border, and shadow are now managed by Vuetify's theme colors (surface) and elevation */
   backdrop-filter: blur(5px); /* Less blur */
   border-radius: 15px;
-  border: 1px solid rgba(224, 224, 224, 0.8); /* Lighter, more subtle border */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Very subtle shadow */
   transition: all 0.3s ease-in-out;
 }
 

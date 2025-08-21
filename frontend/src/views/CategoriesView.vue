@@ -11,14 +11,14 @@
 
 <script setup>
 import CategoryTable from '@/components/Category/CategoryTable.vue';
-import { useCategoryStore } from '@/stores/category'; // Keep this import as it's used by CategoryTable
+import { useCategoryStore } from '@/stores/category';
 
-const categoryStore = useCategoryStore(); // Keep this line, though it's not directly used in this file after the change, it's part of the setup.
+const categoryStore = useCategoryStore();
 </script>
 
 <style scoped>
 .v-container {
-  background-color: #F1F8E9;
+  /* Background color is now managed by Vuetify theme */
   min-height: calc(100vh - 64px - 64px);
 }
 </style>

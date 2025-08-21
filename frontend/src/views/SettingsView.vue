@@ -8,11 +8,12 @@
           <AccordionPanel title="General Settings" icon="mdi-cog">
             <p class="text-body-1 mb-4">Manage general application settings.</p>
             <v-switch
-              v-model="darkMode"
-              label="Enable Dark Mode (Not Implemented)"
+              v-model="themeStore.isDark"
+              label="Enable Dark Mode"
               color="primary"
               hide-details
               class="mb-2"
+              @change="themeStore.toggleTheme()"
             ></v-switch>
             <v-select
               v-model="language"
@@ -97,10 +98,11 @@ import { ref } from 'vue';
 import AccordionPanel from '@/components/Accordion/AccordionPanel.vue';
 import UserProfileFormModal from '@/components/Modal/UserProfileFormModal.vue';
 import { useAuthStore } from '@/stores/auth';
+import { useThemeStore } from '@/stores/theme'; // Import the new theme store
 
 const authStore = useAuthStore();
+const themeStore = useThemeStore(); // Initialize the theme store
 
-const darkMode = ref(false);
 const language = ref('English');
 const emailNotifications = ref(true);
 const pushNotifications = ref(false);
@@ -123,7 +125,7 @@ const handleProfileUpdate = async (userData) => {
 
 <style scoped>
 .v-container {
-  background-color: #F1F8E9;
+  /* Background color is now managed by Vuetify theme */
   min-height: calc(100vh - 64px - 64px);
 }
 </style>

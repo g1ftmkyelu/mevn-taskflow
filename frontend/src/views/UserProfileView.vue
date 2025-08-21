@@ -4,7 +4,7 @@
       <v-col cols="12" md="8" lg="6">
         <h1 class="text-h4 text-center mb-6 text-primary">My Profile</h1>
 
-        <v-card class="glass-card pa-6" elevation="8">
+        <v-card class="glass-card pa-6" elevation="8" color="surface">
           <v-card-title class="text-h5 text-center mb-4">
             <v-icon size="48" color="primary">mdi-account-circle</v-icon>
             <span class="ml-2">User Details</span>
@@ -79,15 +79,8 @@ const handleProfileUpdate = async (userData) => {
 
 <style scoped>
 .v-container {
-  background-color: #F1F8E9;
+  /* Background color is now managed by Vuetify theme */
   min-height: calc(100vh - 64px - 64px);
 }
-.glass-card {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
-  border-radius: 15px;
-  border: 1px solid rgba(224, 224, 224, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-in-out;
-}
+/* Glass card styles are now handled globally in main.css and via Vuetify props */
 </style>

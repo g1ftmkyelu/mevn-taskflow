@@ -1,5 +1,5 @@
 <template>
-  <v-card class="glass-card pa-4" elevation="8">
+  <v-card class="glass-card pa-4" elevation="8" color="surface">
     <v-card-title class="d-flex align-center justify-space-between">
       Categories
       <v-btn color="primary" @click="openAddModal" prepend-icon="mdi-plus" class="text-capitalize">
@@ -45,7 +45,7 @@
           <v-alert type="info" class="mt-4">No categories found. Click "Add Category" to create one.</v-alert>
         </template>
       </v-data-table>
-      <v-card v-else-if="!categoryStore.loading && categoryStore.categories.length === 0" class="pa-6 text-center glass-card">
+      <v-card v-else-if="!categoryStore.loading && categoryStore.categories.length === 0" class="pa-6 text-center glass-card" color="surface">
         <v-icon size="64" color="grey-lighten-1">mdi-tag-multiple</v-icon>
         <p class="text-h6 mt-4 text-grey-darken-1">No categories found. Click "Add Category" to create one!</p>
       </v-card>
@@ -61,7 +61,7 @@
   />
 
   <v-dialog v-model="deleteDialog" max-width="400">
-    <v-card>
+    <v-card color="surface">
       <v-card-title class="text-h6">Confirm Deletion</v-card-title>
       <v-card-text>Are you sure you want to delete category "{{ categoryToDelete?.name }}"?</v-card-text>
       <v-card-actions>
@@ -140,12 +140,5 @@ const closeModal = () => {
 </script>
 
 <style scoped>
-.glass-card {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
-  border-radius: 15px;
-  border: 1px solid rgba(224, 224, 224, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-in-out;
-}
+/* Glass card styles are now handled globally in main.css and via Vuetify props */
 </style>

@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="fill-height d-flex align-center justify-center not-found-background">
-    <v-card class="pa-8 text-center glass-card" elevation="12" max-width="600">
+    <v-card class="pa-8 text-center glass-card" elevation="12" max-width="600" color="surface">
       <v-icon size="128" color="error">mdi-alert-circle-outline</v-icon>
       <h1 class="text-h3 mt-4 mb-2 text-error">404 - Page Not Found</h1>
       <p class="text-h6 text-grey-darken-1 mb-6">
@@ -20,7 +20,7 @@
 
 <style scoped>
 .not-found-background {
-  background-color: #F1F8E9; /* Solid light green background */
+  /* Background color is now managed by Vuetify theme */
   min-height: 100vh;
   display: flex;
   align-items: center;

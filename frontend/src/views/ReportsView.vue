@@ -6,7 +6,7 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-card class="glass-card pa-4 mb-6" elevation="8">
+        <v-card class="glass-card pa-4 mb-6" elevation="8" color="surface">
           <v-card-title class="text-h6">Completion Rate Over Time</v-card-title>
           <v-card-text>
             <LineChart :chart-data="completionRateChartData" :chart-options="chartOptions" />
@@ -15,7 +15,7 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-card class="glass-card pa-4 mb-6" elevation="8">
+        <v-card class="glass-card pa-4 mb-6" elevation="8" color="surface">
           <v-card-title class="text-h6">Todos by Creation Month</v-card-title>
           <v-card-text>
             <BarChart :chart-data="todosByMonthChartData" :chart-options="chartOptions" />
@@ -24,7 +24,7 @@
       </v-col>
 
       <v-col cols="12">
-        <v-card class="glass-card pa-4" elevation="8">
+        <v-card class="glass-card pa-4" elevation="8" color="surface">
           <v-card-title class="text-h6">All Todos Data Grid</v-card-title>
           <v-card-text>
             <v-progress-linear
@@ -56,7 +56,7 @@
                 <v-alert type="info" class="mt-4">No todos to display in the report.</v-alert>
               </template>
             </v-data-table>
-            <v-card v-else-if="!todoStore.loading && todoStore.todos.length === 0" class="pa-6 text-center glass-card">
+            <v-card v-else-if="!todoStore.loading && todoStore.todos.length === 0" class="pa-6 text-center glass-card" color="surface">
               <v-icon size="64" color="grey-lighten-1">mdi-chart-bar</v-icon>
               <p class="text-h6 mt-4 text-grey-darken-1">No task data available for reports.</p>
             </v-card>
@@ -72,8 +72,10 @@ import { ref, computed, onMounted } from 'vue';
 import { useTodoStore } from '@/stores/todo';
 import BarChart from '@/components/Charts/BarChart.vue';
 import LineChart from '@/components/Charts/LineChart.vue';
+import { useTheme } from 'vuetify'; // Import useTheme to get current theme colors
 
 const todoStore = useTodoStore();
+const theme = useTheme(); // Get the current theme instance
 
 const allTodoHeaders = [
   { title: 'Title', key: 'title' },
@@ -110,8 +112,8 @@ const completionRateChartData = computed(() => {
     datasets: [
       {
         label: 'Completion Rate (%)',
-        backgroundColor: 'rgba(56, 142, 60, 0.2)', // Success color with transparency
-        borderColor: '#388E3C',
+        backgroundColor: theme.current.value.colors.success + '20', // Success color with transparency
+        borderColor: theme.current.value.colors.success,
         data: data,
         fill: true,
         tension: 0.3
@@ -144,14 +146,14 @@ const todosByMonthChartData = computed(() => {
     datasets: [
       {
         label: 'Number of Todos Created',
-        backgroundColor: '#81C784', // Light Green
+        backgroundColor: theme.current.value.colors.secondary, // Light Green
         data: data
       }
     ]
   };
 });
 
-const chartOptions = {
+const chartOptions = computed(() => ({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -159,7 +161,7 @@ const chartOptions = {
       display: true,
       position: 'top',
       labels: {
-        color: '#424242'
+        color: theme.current.value.colors['on-surface']
       }
     },
     tooltip: {
@@ -180,24 +182,24 @@ const chartOptions = {
   scales: {
     x: {
       ticks: {
-        color: '#424242'
+        color: theme.current.value.colors['on-surface']
       },
       grid: {
-        color: 'rgba(0, 0, 0, 0.05)'
+        color: theme.current.value.colors['on-background'] + '10'
       }
     },
     y: {
       beginAtZero: true,
       ticks: {
-        color: '#424242',
+        color: theme.current.value.colors['on-surface'],
         precision: 0
       },
       grid: {
-        color: 'rgba(0, 0, 0, 0.05)'
+        color: theme.current.value.colors['on-background'] + '10'
       }
     }
   }
-};
+}));
 
 onMounted(() => {
   todoStore.fetchTodos();
@@ -206,15 +208,8 @@ onMounted(() => {
 
 <style scoped>
 .v-container {
-  background-color: #F1F8E9;
+  /* Background color is now managed by Vuetify theme */
   min-height: calc(100vh - 64px - 64px);
 }
-.glass-card {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
-  border-radius: 15px;
-  border: 1px solid rgba(224, 224, 224, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-in-out;
-}
+/* Glass card styles are now handled globally in main.css and via Vuetify props */
 </style>

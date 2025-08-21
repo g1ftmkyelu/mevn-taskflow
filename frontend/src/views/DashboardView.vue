@@ -6,7 +6,7 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-card class="glass-card pa-4 mb-6" elevation="8">
+        <v-card class="glass-card pa-4 mb-6" elevation="8" color="surface">
           <v-card-title class="text-h6">Todo Status</v-card-title>
           <v-card-text>
             <BarChart :chart-data="todoStatusChartData" :chart-options="chartOptions" />
@@ -15,7 +15,7 @@
       </v-col>
 
       <v-col cols="12" md="6">
-        <v-card class="glass-card pa-4 mb-6" elevation="8">
+        <v-card class="glass-card pa-4 mb-6" elevation="8" color="surface">
           <v-card-title class="text-h6">Todos by Due Date (Next 30 Days)</v-card-title>
           <v-card-text>
             <LineChart :chart-data="todosByDueDateChartData" :chart-options="chartOptions" />
@@ -24,7 +24,7 @@
       </v-col>
 
       <v-col cols="12">
-        <v-card class="glass-card pa-4" elevation="8">
+        <v-card class="glass-card pa-4" elevation="8" color="surface">
           <v-card-title class="text-h6">Recent Todos</v-card-title>
           <v-card-text>
             <v-progress-linear
@@ -53,7 +53,7 @@
                 <v-alert type="info" class="mt-4">No recent todos to display.</v-alert>
               </template>
             </v-data-table>
-            <v-card v-else-if="!todoStore.loading && recentTodos.length === 0" class="pa-6 text-center glass-card">
+            <v-card v-else-if="!todoStore.loading && recentTodos.length === 0" class="pa-6 text-center glass-card" color="surface">
               <v-icon size="64" color="grey-lighten-1">mdi-check-circle-outline</v-icon>
               <p class="text-h6 mt-4 text-grey-darken-1">No recent tasks found. Add some todos!</p>
             </v-card>
@@ -69,8 +69,10 @@ import { ref, computed, onMounted } from 'vue';
 import { useTodoStore } from '@/stores/todo';
 import BarChart from '@/components/Charts/BarChart.vue';
 import LineChart from '@/components/Charts/LineChart.vue';
+import { useTheme } from 'vuetify'; // Import useTheme to get current theme colors
 
 const todoStore = useTodoStore();
+const theme = useTheme(); // Get the current theme instance
 
 const recentTodoHeaders = [
   { title: 'Title', key: 'title' },
@@ -93,7 +95,7 @@ const todoStatusChartData = computed(() => {
     datasets: [
       {
         label: 'Number of Todos',
-        backgroundColor: ['#388E3C', '#FBC02D'], // Success, Warning
+        backgroundColor: [theme.current.value.colors.success, theme.current.value.colors.warning], // Use theme colors
         data: [completedCount, pendingCount]
       }
     ]
@@ -125,8 +127,8 @@ const todosByDueDateChartData = computed(() => {
     datasets: [
       {
         label: 'Pending Todos',
-        backgroundColor: '#1976D2', // Info color
-        borderColor: '#1976D2',
+        backgroundColor: theme.current.value.colors.info, // Use theme color
+        borderColor: theme.current.value.colors.info,
         data: data,
         fill: false,
         tension: 0.1
@@ -135,7 +137,7 @@ const todosByDueDateChartData = computed(() => {
   };
 });
 
-const chartOptions = {
+const chartOptions = computed(() => ({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -143,7 +145,7 @@ const chartOptions = {
       display: true,
       position: 'top',
       labels: {
-        color: '#424242' // Dark grey for legend text
+        color: theme.current.value.colors['on-surface'] // Use on-surface color for legend text
       }
     },
     tooltip: {
@@ -164,24 +166,24 @@ const chartOptions = {
   scales: {
     x: {
       ticks: {
-        color: '#424242'
+        color: theme.current.value.colors['on-surface'] // Use on-surface color for ticks
       },
       grid: {
-        color: 'rgba(0, 0, 0, 0.05)'
+        color: theme.current.value.colors['on-background'] + '10' // Lighter grid lines
       }
     },
     y: {
       beginAtZero: true,
       ticks: {
-        color: '#424242',
+        color: theme.current.value.colors['on-surface'], // Use on-surface color for ticks
         precision: 0
       },
       grid: {
-        color: 'rgba(0, 0, 0, 0.05)'
+        color: theme.current.value.colors['on-background'] + '10' // Lighter grid lines
       }
     }
   }
-};
+}));
 
 onMounted(() => {
   todoStore.fetchTodos();
@@ -190,15 +192,8 @@ onMounted(() => {
 
 <style scoped>
 .v-container {
-  background-color: #F1F8E9;
+  /* Background color is now managed by Vuetify theme */
   min-height: calc(100vh - 64px - 64px);
 }
-.glass-card {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
-  border-radius: 15px;
-  border: 1px solid rgba(224, 224, 224, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-in-out;
-}
+/* Glass card styles are now handled globally in main.css and via Vuetify props */
 </style>

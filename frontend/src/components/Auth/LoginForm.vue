@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-6 glass-card" elevation="12" max-width="450" width="100%">
+  <v-card class="pa-6 glass-card" elevation="12" max-width="450" width="100%" color="surface">
     <v-card-title class="text-h5 text-center mb-4">Login to TaskFlow</v-card-title>
     <v-card-text>
       <v-alert v-if="authStore.error" type="error" dismissible class="mb-4">

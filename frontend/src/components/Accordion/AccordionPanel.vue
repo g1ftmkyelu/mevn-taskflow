@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panel class="glass-card mb-4">
+  <v-expansion-panel class="glass-card mb-4" color="surface" elevation="4">
     <v-expansion-panel-title class="text-h6 text-primary">
       <v-icon start>{{ icon }}</v-icon>
       {{ title }}
@@ -24,12 +24,5 @@ defineProps({
 </script>
 
 <style scoped>
-.glass-card {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
-  border-radius: 15px;
-  border: 1px solid rgba(224, 224, 224, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-in-out;
-}
+/* Glass card styles are now handled globally in main.css and via Vuetify props */
 </style>

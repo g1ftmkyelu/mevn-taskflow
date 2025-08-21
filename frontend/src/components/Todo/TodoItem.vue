@@ -3,6 +3,7 @@
     class="mb-4 pa-4 glass-card d-flex align-center justify-space-between"
     :class="{ 'completed-todo': todo.completed }"
     elevation="4"
+    color="surface"
   >
     <div class="d-flex align-center flex-grow-1">
       <v-checkbox-btn
@@ -43,7 +44,7 @@
   </v-card>
 
   <v-dialog v-model="deleteDialog" max-width="400">
-    <v-card>
+    <v-card color="surface">
       <v-card-title class="text-h6">Confirm Deletion</v-card-title>
       <v-card-text>Are you sure you want to delete "{{ todo.title }}"?</v-card-text>
       <v-card-actions>

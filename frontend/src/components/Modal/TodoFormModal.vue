@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px" persistent>
-    <v-card class="glass-card pa-4">
+    <v-card class="glass-card pa-4" color="surface">
       <v-card-title class="text-h5 text-center mb-4">
         {{ isEdit ? 'Edit Todo' : 'Add New Todo' }}
       </v-card-title>
@@ -70,12 +70,5 @@ const closeDialog = () => {
 </script>
 
 <style scoped>
-.glass-card {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
-  border-radius: 15px;
-  border: 1px solid rgba(224, 224, 224, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-in-out;
-}
+/* Glass card styles are now handled globally in main.css and via Vuetify props */
 </style>
